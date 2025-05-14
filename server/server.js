@@ -13,10 +13,12 @@ const app = express();  //created a express app
 const PORT = process.env.PORT || 4000;
 connectDB();
 
+const allowedOrigins = ['http://localhost:5173']
+
 app.use(express.json()); // all the request will be passed using json
 app.use(cookieParser());
 app.use(cors({
-    credentials: true  // we can send cookies in the response
+    origin: allowedOrigins , credentials: true  // we can send cookies in the response
 
 }))
 
