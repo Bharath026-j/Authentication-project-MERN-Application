@@ -3,11 +3,12 @@ import { assets } from '../assets/assets';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../context/AppContext';
 import axios from 'axios';
+import { data } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
 const Login = () => {
   const navigate = useNavigate();
-  const { backendurl, setIsLoggedIn } = useContext(AppContext);
+  const { backendurl, setIsLoggedIn, getUserData } = useContext(AppContext);
 
   const [state, setState] = useState('signup');
   const [name, setName] = useState('');
@@ -15,33 +16,36 @@ const Login = () => {
   const [password, setPassword] = useState('');
 
   const onSubmitHandler = async (e) => {
-    e.preventDefault();
-    axios.defaults.withCredentials = true;
-
     try {
-      let response;
+        e.preventDefault();
+        axios.defaults.withCredentials = true;
+      // let response;
+      // const { data } = response;
+      // console.log(response.message);
       
       if (state === 'signup') {
-        response = await axios.post(`${backendurl}/api/auth/register`, {
-          name,
-          email,
-          password,
-        });
+          const {data} = await axios.post(`${backendurl}/api/auth/register`, 
+          {name, email, password});
+
+          if (data.success) {
+            setIsLoggedIn(true);
+            getUserData();
+            navigate('/');
+          } else {
+            toast.error(data.message);
+          }
       } else {
-        response = await axios.post(`${backendurl}/api/auth/login`, {
-          email,
-          password,
-        });
-      }
-
-      const { data } = response;
-
+        const {data} = await axios.post(`${backendurl}/api/auth/login`, {
+        email, password});
+        
       if (data.success) {
         setIsLoggedIn(true);
+        getUserData();
         navigate('/');
       } else {
         toast.error(data.message);
       }
+        }
     } catch (error) {
       toast.error(error.response?.data?.message || "Something went wrong");
     }
