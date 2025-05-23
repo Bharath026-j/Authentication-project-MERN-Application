@@ -42,9 +42,9 @@ const Navbar = () => {
 
   return (
     <div className='w-full flex justify-between items-center p-4 sm:p-6 sm:px-24 absolute top-0'>
-        <img src={assets.logo} alt="" className='' />
+        <img src={assets.logo} alt="" className=' sm:left-20 top-5 w-24 sm:w-24 cursor-pointer' />
         { userData ? 
-        <div className='w-8 h-8 flex items-center justify-center rounded-full bg-gray-950 text-white relative group'>
+        <div className='w-8 h-8 flex items-center justify-center rounded-full bg-blue-950 border-pink-700 outline text-white relative group'>
           {userData.name[0].toUpperCase()}
           <div className='absolute hidden group-hover:block top-0 right-0 z-10 text-black rounded pt-10'>
             <ul className='list-none w-full m-0 p-2 bg-gray-100 text-sm'>

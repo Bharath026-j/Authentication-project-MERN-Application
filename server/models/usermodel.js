@@ -24,7 +24,10 @@ const userSchema = new mongoose.Schema({
    } ,
    resetOtpExpiredAt: {
     type: Number, default:0
-   } 
+   } ,
+   photo :{
+      type: String
+   }
 })
 
 

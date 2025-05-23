@@ -10,6 +10,7 @@ import userRouter from "./routes/userRoutes.js";
 
 const app = express();  //created a express app
 
+
 const PORT = process.env.PORT || 4000;
 connectDB();
 
@@ -28,8 +29,9 @@ app.listen(PORT, ()=>{
 })
 
 app.get("/", (req,res)=>{
-    res.send("API Working perfectly and successfully gefgwe");
+    res.send("API Working perfectly and successfully");
 })
 
 app.use('/api/auth' , authRouter)
 app.use('/api/user' , userRouter)
+app.use('/images', express.static('public'));

@@ -4,6 +4,9 @@ import jwt from "jsonwebtoken";
 import userModel from "../models/usermodel.js";
 import transporter from "../config/nodemailer.js";
 import { text } from "express";
+import { EMAIL_TEMPLATE,VERIFY_OTP,RESET_OTP } from "../config/emailTemplate.js";
+// import { assets } from "../../client/src/assets/assets.js";
+// import { assets } from "../../client/src/assets/assets.js";
 
 
 //Register Controller
@@ -30,7 +33,7 @@ export const register = async (req,res)=>{
         const user = new userModel ({name , email , password:hasshedPassword});  //new user auth
         await user.save(); // save this user in database
 
-        //generate tooken for auth to cookies
+        //generate token for auth to cookies
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET , { expiresIn: '7days'});
 
         res.cookie('token', token , {
@@ -41,11 +44,13 @@ export const register = async (req,res)=>{
         })
 
         //sending welcome email
+        
         const mailOptions = {
             from: process.env.SENDER_EMAIL,
             to: email,
             subject: 'Welcome to our App',
-            text: `Welcome to our website. Your account has been created successfully with the email ID: ${email}.` 
+            // text: `Welcome to our website. Your account has been created successfully with the email ID: ${email}.` 
+            html : EMAIL_TEMPLATE.replace('{{name}}', name).replace('{{image}}', 'https://cdn.templates.unlayer.com/assets/1661428767276-img.png')
         }
 
         await transporter.sendMail(mailOptions);
@@ -124,11 +129,14 @@ export const login = async (req,res)=>{
 
             await user.save();
 
+
+            
             const mailOptions = {
                 from: process.env.SENDER_EMAIL,
                 to: user.email,
                 subject: 'Verify your email',
-                text: `Your OTP is ${otp}. It is valid for 24 hours.`
+                // text: `Your OTP is ${otp}. It is valid for 24 hours.`,
+                html : VERIFY_OTP.replace('{{OTP_CODE}}',otp)
             }
 
             await transporter.sendMail(mailOptions);
@@ -205,7 +213,8 @@ export const login = async (req,res)=>{
                 from: process.env.SENDER_EMAIL,
                 to: user.email,
                 subject: 'Password Reset OTP',
-                text: `Your OTP is ${otp} to reset your password. It is valid for 15 minutes.`
+                // text: `Your OTP is ${otp} to reset your password. It is valid for 15 minutes.`
+                html : RESET_OTP.replace('{{OTP_CODE}}',otp)
                 
             }
 

@@ -6,10 +6,14 @@ import axios from 'axios';
 import { data } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+
+  
+
 const Login = () => {
   const navigate = useNavigate();
   const { backendurl, setIsLoggedIn, getUserData } = useContext(AppContext);
 
+  const [visible, setVisible] = useState(false);
   const [state, setState] = useState('signup');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -57,7 +61,7 @@ const Login = () => {
         onClick={() => navigate('/')}
         src={assets.logo}
         alt="Logo"
-        className="absolute left-5 sm:left-20 top-5 w-28 sm:w-32 cursor-pointer"
+        className="absolute left-5 sm:left-20 top-5 w-24 sm:w-24 cursor-pointer"
       />
 
       <div className="bg-purple-500 p-10 rounded-lg shadow-lg w-full sm:w-96 text-black-700 text-sm hover:shadow-2xl hover:shadow-red-600 transition-all">
@@ -92,20 +96,26 @@ const Login = () => {
               type="email"
               placeholder="E-mail id"
               required
-              className="bg-transparent outline-none"
+              className="bg-transparent outline-none text-white"
             />
           </div>
 
-          <div className="flex mb-4 items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C]">
+          <div className="flex mb-4 items-center gap-3 w-full px-5 py-2.5 rounded-full bg-[#333A5C] relative">
             <img src={assets.lock_icon} alt="Lock Icon" />
             <input
               onChange={(e) => setPassword(e.target.value)}
               value={password}
-              type="password"
+              type={visible ? 'text' : 'password'}
               placeholder="Password"
               required
-              className="bg-transparent outline-none"
+              className="bg-transparent outline-none text-white "
             />
+            <span
+        onClick={() => setVisible(!visible)}
+        className='absolute right-3  cursor-pointer'
+      >
+        {visible ? '🙈' : '👁️'}
+      </span>
           </div>
 
           <p

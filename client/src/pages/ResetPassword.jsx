@@ -80,7 +80,7 @@ const ResetPassword = () => {
           alt="Logo"
           className="absolute left-5 sm:left-20 top-5 w-28 sm:w-32 cursor-pointer"
         /> 
-        {/* Enter Emial ID */}
+        {/* Enter Email ID */}
 
       {!isEmailSent && 
 
@@ -124,7 +124,7 @@ const ResetPassword = () => {
         <p className=' text-center mb-6 text-indigo-400'>Enter the new password</p>
           <div className='flex mb-4 items-center gap-3 w-full px-5 py-2.5 rounded-full text-white bg-[#333A5C]'>
             <img src={assets.lock_icon} alt="mail" className='w-3 h-3'/>
-            <input type="password" placeholder='New password' value={newPassword} 
+            <input type="password"  placeholder='New password' value={newPassword} 
             onChange={e => setNewPassword(e.target.value)} 
             className='outline-none bg-transparent'/>
           </div>
