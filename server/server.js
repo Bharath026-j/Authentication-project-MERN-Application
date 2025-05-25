@@ -14,7 +14,7 @@ const app = express();  //created a express app
 const PORT = process.env.PORT || 4000;
 connectDB();
 
-const allowedOrigins = ['http://localhost:5173']
+const allowedOrigins = ['https://authentication-project-mern-application.onrender.com']
 
 app.use(express.json()); // all the request will be passed using json
 app.use(cookieParser());
