@@ -101,7 +101,7 @@ export const VERIFY_OTP = `<!DOCTYPE html>
 </head>
 <body>
   <div class="container">
-    <img class="header-img" src="http://localhost:6969/images/otp1.svg" alt="Email Verification">
+    <img class="header-img" src="https://userauthentication-backend-3ozz.onrender.com/images/otp1.svg" alt="Email Verification">
     <h1>Email Verification</h1>
     <p>Please use the following OTP to complete your verification process:</p>
     <div class="otp-code">{{OTP_CODE}}</div>
@@ -162,7 +162,7 @@ export const RESET_OTP = `<!DOCTYPE html>
 </head>
 <body>
   <div class="email-container">
-    <img src="http://localhost:6969/images/otp2.svg" alt="Reset Password">
+    <img src="https://userauthentication-backend-3ozz.onrender.com/images/otp2.svg" alt="Reset Password">
     <h2>Reset Your Password</h2>
     <p>You requested to reset your password. Please use the OTP below to proceed:</p>
     <div class="otp-code">{{OTP_CODE}}</div>
